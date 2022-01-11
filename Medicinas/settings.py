@@ -26,8 +26,6 @@ SECRET_KEY = os.environ.get('DJ_SECURITY_KEY','')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
-
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
@@ -81,6 +79,7 @@ TEMPLATES = [
         },
     },
 ]
+
 ALLOWED_HOSTS =  ['medicinas.herokuapp.com','127.0.0.1']
 WSGI_APPLICATION = 'Medicinas.wsgi.application'
 
