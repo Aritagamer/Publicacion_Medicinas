@@ -150,4 +150,4 @@ DATABASES['default'].update(db_from_env)
 
 
 # The URL to use when referring to static files (where they will be served from)
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
