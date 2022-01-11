@@ -1,0 +1,18 @@
+{% extends 'Base/template.html' %}
+{% load static %}
+{% block titulo %}
+  <title>Error inesperado</title>
+{% endblock %}
+
+{% block contenido %}
+    <div class = "alert alert-danger" role="alert">Nesecita iniciar sesion antes de visualizar esta informacion intentelo mas tarde</div>
+    <script>
+        function page()
+        {
+
+          window.location.replace("{{URL}}");
+          
+        }
+        setTimeout(page,3000)
+    </script>
+{% endblock %}

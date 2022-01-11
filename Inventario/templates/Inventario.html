@@ -1,0 +1,59 @@
+{% extends 'Base/template.html' %}
+{% load static %}
+{% block titulo %}
+  <title>Inicio de sesion</title>
+{% endblock %}
+
+{% block contenido %}
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-4">
+        <p class = "text-start fs-4 fw-bold"> Inventario de medicamentos </p>
+      </div>
+      <div class="col-8">
+        <ul class="nav justify-content-end">
+      
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/inv/new/">Nuevo Medicamento</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class = "table table-info table-striped table-hover">
+      <thead>
+          <tr>
+              <th>#</th>
+              <th>Nombre</th>
+              <th>Cantidad</th>
+              <th></th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for i in elem %}
+              <tr>
+                  <th>{{ forloop.counter  }}</th>
+                  <td>{{ i.Medicamento }}</td>
+                  <td>{{ i.Unidades }}</td>
+                  <td>
+                    <form action="/inv/update" method="get">{% csrf_token %}
+                      <input type="hidden" name="id" value="{{ i.id }}">
+                      <button type="submit" class = "btn btn-primary mb-3">Editar</button>
+                    </form>
+                  </td>
+                  <td>
+                    <form action="/inv/delete/" method="post">{% csrf_token %}
+                      <input type="hidden" name="id" value="{{ i.id }}">
+                      <button type="submit" class = "btn btn-danger mb-3">Eliminar</button>
+                    </form>
+                  </td>
+              </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

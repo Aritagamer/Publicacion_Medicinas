@@ -1,0 +1,23 @@
+{% extends 'Base/template.html' %}
+{% load static %}
+
+{% block titulo %}
+  <title>Inicio de sesion</title>
+{% endblock %}
+
+{% block contenido %}
+
+
+  <div class="alert alert-success" role="alert"> {{ mensaje }} </div>
+  <script>
+    function page()
+    {
+
+      window.location.replace("{{URL}}");
+      
+    }
+    setTimeout(page,3000)
+  </script>
+    
+  
+{% endblock %}
