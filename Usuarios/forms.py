@@ -4,8 +4,8 @@ from werkzeug.security import generate_password_hash,check_password_hash
 
 class registro(forms.Form):
 
-    Email = forms.EmailField(label="Correo",required=True,max_length=100,widget=forms.EmailInput(attrs={'class':'form-control'}))
-    Password = forms.CharField(label="Contraseña",required=True,max_length=55,widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    Email = forms.EmailField(label="Correo",required=True,max_length=100,widget=forms.EmailInput(attrs={'class':'form-control', "style":"width: 50vw; font-size: 2.5vh;"}))
+    Password = forms.CharField(label="Contraseña",required=True,max_length=55,widget=forms.PasswordInput(attrs={'class':'form-control', "style":"width: 50vw; font-size: 2.5vh;"}))
 
     error_css_class = 'alert alert-danger'
 
@@ -26,11 +26,11 @@ class registro(forms.Form):
 
 class Personal_Info(forms.Form):
     
-    Email = forms.EmailField(label="Correo",required=True,max_length=100,widget=forms.EmailInput(attrs={'class':'form-control'}))
-    Password = forms.CharField(label="Contraseña",required=True,max_length=55,widget=forms.PasswordInput(attrs={'class':'form-control'}))
-    Confirm_Password = forms.CharField(label="Confirme la contraseña",required=True,max_length=55,widget=forms.PasswordInput(attrs={'class':'form-control'}))
-    Nombre = forms.CharField(label="Nombre",max_length=75,required=True,widget=forms.TextInput(attrs={'class':'form-control'}))
-    Fecha_Nac = forms.DateField(label="Fecha de Nacimiento",input_formats=('%d/%m/%Y','%d/%m/%y','%Y-%m-%d'),widget=forms.DateInput(attrs={'class':'form-control',"type" : "date"}))
+    Email = forms.EmailField(label="Correo",required=True,max_length=100,widget=forms.EmailInput(attrs={'class':'form-control', "style":"width: 50vw; font-size: 2.5vh;"}))
+    Password = forms.CharField(label="Contraseña",required=True,max_length=55,widget=forms.PasswordInput(attrs={'class':'form-control', "style":"width: 50vw; font-size: 2.5vh;"}))
+    Confirm_Password = forms.CharField(label="Confirme la contraseña",required=True,max_length=55,widget=forms.PasswordInput(attrs={'class':'form-control', "style":"width: 50vw; font-size: 2.5vh;"}))
+    Nombre = forms.CharField(label="Nombre",max_length=75,required=True,widget=forms.TextInput(attrs={'class':'form-control', "style":"width: 50vw; font-size: 2.5vh;"}))
+    Fecha_Nac = forms.DateField(label="Fecha de Nacimiento",input_formats=('%d/%m/%Y','%d/%m/%y','%Y-%m-%d'),widget=forms.DateInput(attrs={'class':'form-control',"type" : "date", "style":"width: 50vw; font-size: 2.5vh;"}))
 
     error_css_class = 'alert alert-danger'
     #required_css_class = 'alert alert-warning'
