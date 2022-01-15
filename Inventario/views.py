@@ -23,6 +23,7 @@ def nuevo(request):
             Medicamento = data.get('Medicamento'),
             Unidades = data.get('Unidades'),
             ID_Usuario = usuario,
+            Registro = data.get('Registro')
         )
 
         medicina.save()
@@ -50,6 +51,7 @@ def Editar(request):
         request.session["Temp_ID"] = ''
         medicina.Medicamento = data.get("Medicamento")
         medicina.Unidades = data.get("Unidades")
+        medicina.Registro = data.get("Registro")
         medicina.save()
 
         return render(request,'exito.html',{"user":user,"mensaje":"Medicamento actualizado con exito",'URL':'/inv/'})
@@ -61,6 +63,7 @@ def Editar(request):
     f = Registro(auto_id=True)
     f.fields["Medicamento"].initial = medicina.Medicamento
     f.fields["Unidades"].initial = medicina.Unidades
+    f.fields["Registro"].initial = medicina.Registro
     return render(request,'Formularios.html',{"user":user,"Formulario":f})
 
 
