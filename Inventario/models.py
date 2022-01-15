@@ -5,7 +5,7 @@ from Usuarios.models import Usuario
 class Medicinas(models.Model):
     Medicamento = models.CharField(verbose_name='Medicamento',null=False,blank=False,max_length=100)
     Unidades = models.FloatField(verbose_name="Cantidad",null=True,blank=True)
-    Registro = models.BooleanField(verbose_name="Registro",null=False,blank=False)
+    Registro = models.BooleanField(verbose_name="Registro",null=False,blank=False,default=True)
     ID_Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     def __str__(self):
