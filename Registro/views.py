@@ -41,11 +41,16 @@ def Dar_Medicina(request):
         data = formulario.cleaned_data
         medicamento = Medicinas.objects.get( id = data.get('Medicamento') )
         usuario  = Usuario.objects.get( id = request.session.get('User_ID'))
+        dosis = data.get('Dosis')
+
+        if medicamento.Registro:
+            medicamento.Unidades = float( medicamento.Unidades ) - float(dosis)
+            medicamento.save()
 
         new_reg = Registro(
             ID_Usuario = usuario,
             Medicamento = medicamento,
-            Dosis = data.get('Dosis')
+            Dosis = dosis
         )
         new_reg.save()
 

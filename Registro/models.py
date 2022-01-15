@@ -5,7 +5,7 @@ from Inventario.models import Medicinas
 class Registro(models.Model):
     ID_Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     Fecha_Hora = models.DateTimeField(verbose_name="Hora",null=False,blank=False,auto_now_add=True)
-    Medicamento = models.ForeignKey(Medicinas,on_delete=models.PROTECT)
+    Medicamento = models.ForeignKey(Medicinas,on_delete=models.SET_NULL,null=True)
     Dosis = models.FloatField(verbose_name="Dosis",null=False,blank=False)
 
     def __str__(self):
