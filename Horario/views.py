@@ -29,6 +29,8 @@ def Horario(request):
         medicamento = Medicinas.objects.get( id = data.get('Medicamento') )
         usuario  = Usuario.objects.get( id = request.session.get('User_ID'))
 
+        print("\n\n\n %s\t%s \n\n\n"%(medicamento.Medicamento,usuario.Nombre))
+
         new_reg = Registro(
             ID_Usuario = usuario,
             Medicamento = medicamento,
