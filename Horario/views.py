@@ -29,23 +29,20 @@ def Horario(request):
         medicamento = Medicinas.objects.get( id = data.get('Medicamento') )
         usuario  = Usuario.objects.get( id = request.session.get('User_ID'))
 
-        dia = data.get('Dia')
-        hora = data.get('Hora')
-        minutos = data.get('Minutos')
-        dosis = data.get('Dosis')
+        try:
 
-        print("\n\n\n %s\t%s\t%s\t%s \n\n\n"%(dia,hora,minutos,dosis))
-
-        New_Horario = Horario(
-            Dia = data.get('Dia'),
-            Hora = data.get('Hora'),
-            Minutos = data.get('Minutos'),
-            Medicamento = medicamento,
-            Dosis = data.get('Dosis'),
-            Usuario = usuario
-        )
-        print("Si pase")
-        New_Horario.save()
+            New_Horario = Horario(
+                Dia = data.get('Dia'),
+                Hora = data.get('Hora'),
+                Minutos = data.get('Minutos'),
+                Medicamento = medicamento,
+                Dosis = data.get('Dosis'),
+                Usuario = usuario
+            )
+            print("Si pase")
+            New_Horario.save()
+        except Exception as e:
+            print(e)
 
         """new_reg = Registro(
             ID_Usuario = usuario,
