@@ -26,14 +26,14 @@ SECRET_KEY = os.environ.get('DJ_SECURITY_KEY','')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+"""SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True"""
 
-SECURE_SSL_REDIRECT = True
+"""SECURE_SSL_REDIRECT = True
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_SECONDS = 60
-
+"""
 
 # Application definition
 
