@@ -31,14 +31,24 @@ def Horario(request):
 
         print("\n\n\n %s\t%s \n\n\n"%(medicamento.Medicamento,usuario.Nombre))
 
-        new_reg = Registro(
+        New_Horario = Horario(
+            Dia = data.get('Dia'),
+            Hora = data.get('Hora'),
+            Minutos = data.get('Minutos'),
+            Medicamento = medicamento,
+            Dosis = data.get('Dosis'),
+            Usuario = usuario
+        )
+        New_Horario.save()
+
+        """new_reg = Registro(
             ID_Usuario = usuario,
             Medicamento = medicamento,
             Dosis = data.get('Dosis')
         )
-        new_reg.save()
+        new_reg.save()"""
 
-        return render(request,'exito.html',{"user":user,"mensaje":"Toma de medicamento registrada",'URL':'/reg/'})
+        return render(request,'exito.html',{"user":user,"mensaje":"Horario registrado con exito",'URL':'/hor/'})
 
     f = Set_Horario(auto_id=True)
     
