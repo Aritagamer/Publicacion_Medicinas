@@ -34,7 +34,7 @@ def Horario(request):
         new_reg = Registro(
             ID_Usuario = usuario,
             Medicamento = medicamento,
-            Dosis = data.get('')
+            Dosis = data.get('Dosis')
         )
         new_reg.save()
 
