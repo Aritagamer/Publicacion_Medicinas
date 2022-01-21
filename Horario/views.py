@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from .forms import Set_Horario
+import datetime
 
 #__________________Importacion de modelos______________________________
 from Usuarios.models import Usuario
-from .models import Horario
+from Horario.models import Horario
 from Inventario.models import Medicinas
 from Registro.models import Registro
 
@@ -42,8 +43,9 @@ def Horario(request):
             print("Si pase")
             New_Horario.save()
         except Exception as e:
+            print("\n\n\n" + str(datetime.date.today()))
             print(e)
-
+            print("\n\n\n")
         """new_reg = Registro(
             ID_Usuario = usuario,
             Medicamento = medicamento,
