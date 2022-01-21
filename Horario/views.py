@@ -29,7 +29,12 @@ def Horario(request):
         medicamento = Medicinas.objects.get( id = data.get('Medicamento') )
         usuario  = Usuario.objects.get( id = request.session.get('User_ID'))
 
-        print("\n\n\n %s\t%s \n\n\n"%(medicamento.Medicamento,usuario.Nombre))
+        dia = data.get('Dia')
+        hora = data.get('Hora')
+        minutos = data.get('Minutos')
+        dosis = data.get('Dosis')
+
+        print("\n\n\n %s\t%s\t%s\t%s \n\n\n"%(dia,hora,minutos,dosis))
 
         New_Horario = Horario(
             Dia = data.get('Dia'),
