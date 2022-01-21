@@ -32,7 +32,7 @@ def Horario(request):
         try:
 
             New_Horario = Horario(
-                Dia = data.get('Dia'),
+                Num_Dia = data.get('Dia'),
                 Hora = data.get('Hora'),
                 Minutos = data.get('Minutos'),
                 Medicamento = medicamento,
