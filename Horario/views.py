@@ -39,6 +39,7 @@ def Horario(request):
             Dosis = data.get('Dosis'),
             Usuario = usuario
         )
+        print("Si pase")
         New_Horario.save()
 
         """new_reg = Registro(
