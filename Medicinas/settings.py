@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'APPMedicamentos',
     'Usuarios',
     'Inventario',
-    'Registro'
+    'Registro',
+    'Horario'
 ]
 
 MIDDLEWARE = [

@@ -21,5 +21,6 @@ urlpatterns = [
     path('',include('APPMedicamentos.urls')),
     path('users/',include('Usuarios.urls')),
     path('inv/',include('Inventario.urls')),
-    path('reg/',include('Registro.urls'))
+    path('reg/',include('Registro.urls')),
+    path('hor/',include('Horario.urls'))
 ]
