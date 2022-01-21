@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from forms import Set_Horario
+from .forms import Set_Horario
 
 #__________________Importacion de modelos______________________________
 from Usuarios.models import Usuario
-from models import Horario
+from .models import Horario
 from Inventario.models import Medicinas
 from Registro.models import Registro
 
