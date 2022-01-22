@@ -1,0 +1,98 @@
+{% extends 'Base/template.html' %}
+{% load static %}
+{% block titulo %}
+  <title>Horario</title>
+{% endblock %}
+
+{% block contenido %}
+
+
+  <div class="container-fluid" >
+    <div class="row" >
+      <div class="col-6 ">
+        <p class = "text-start fw-bold text-wrap"  style="font-size: 2.7vh;"> Horario del dia {{ dia}} </p>
+      </div>
+      <div class="col-6">
+        <ul class="nav justify-content-end">
+      
+          <li class="nav-item">
+            <a class="btn btn-primary" aria-current="page" href="/hor/new/"  style="font-size: 2.5vh;">Agregar horario</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+        <form action="" method="post">{% csrf_token %}
+            <div class="btn-group btn-group-sm" role="group" aria-label="Basic radio toggle button group" style="font-size: 2.5vh;">
+            
+                <input type="radio" class="btn-check" name="dia_sel" value = "1" id="dia_sel1" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 1 %} checked {% endif %}>
+                <label class="btn btn-outline-primary" for="dia_sel1" style="font-size: 2vh;">Lunes</label>
+              
+                <input type="radio" class="btn-check" name="dia_sel" value = "2" id="dia_sel2" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 2 %} checked {% endif %}>
+                <label class="btn btn-outline-primary" for="dia_sel2" style="font-size: 2vh;">Martes</label>
+              
+                <input type="radio" class="btn-check" name="dia_sel" value = "3" id="dia_sel3" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 3 %} checked {% endif %}>
+                <label class="btn btn-outline-primary" for="dia_sel3" style="font-size: 2vh;">Miercoles</label>
+    
+                <input type="radio" class="btn-check" name="dia_sel" value = "4" id="dia_sel4" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 4 %} checked {% endif %}>
+                <label class="btn btn-outline-primary" for="dia_sel4" style="font-size: 2vh;">Jueves</label>
+    
+                <input type="radio" class="btn-check" name="dia_sel" value = "5" id="dia_sel5" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 5 %} checked {% endif %}>
+                <label class="btn btn-outline-primary" for="dia_sel5" style="font-size: 2vh;">Viernes</label>
+    
+                <input type="radio" class="btn-check" name="dia_sel" value = "6" id="dia_sel6" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 6 %} checked {% endif %}>
+                <label class="btn btn-outline-primary" for="dia_sel6" style="font-size: 2vh;">Sabado</label>
+    
+                <input type="radio" class="btn-check" name="dia_sel" value = "7" id="dia_sel7" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 7 %} checked {% endif %}>
+                <label class="btn btn-outline-primary" for="dia_sel7" style="font-size: 2vh;">Domigo</label>
+            
+            </div>
+            </form>
+    </div>
+  </div>
+  <div class="table-responsive" >
+    <table class = "table table-info table-striped table-hover text-center"  style="font-size: 2.5vh;">
+      <thead>
+          <tr>
+              <th class="text-start">#</th>
+              <th class="text-start">Nombre</th>
+              <th>Dosis</th>
+              <th>Horario</th>
+              <th></th>
+              <th></th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for i in elem %}
+              <tr>
+                  <th class="text-start">{{ forloop.counter  }}</th>
+                  <td class="text-start">{{ i.Medicamento }}</td>
+                  <td>{{ i.Dosis }}</td>
+                  <td>
+                      {{ i.Hora}} : {{i.Minutos|stringformat:"02d"}}
+                  </td>
+                  <td>
+                    <form action="/hor/give/" method="post">{% csrf_token %}
+                      <input type="hidden" name="id" value="{{ i.id }}">
+                      <button type="submit" class = "btn btn-primary mb-3" style = "font-size: 2vh;">Tomar</button>
+                    </form>
+                  </td>
+                  <td>
+                    <form action="/hor/update/" method="get">{% csrf_token %}
+                      <input type="hidden" name="id" value="{{ i.id }}">
+                      <button type="submit" class = "btn btn-primary mb-3" style = "font-size: 2vh;">Editar</button>
+                    </form>
+                  </td>
+                  <td>
+                    <form action="/hor/delete/" method="post">{% csrf_token %}
+                      <input type="hidden" name="id" value="{{ i.id }}">
+                      <button type="submit" class = "btn btn-danger mb-3" style = "font-size: 2vh;">Eliminar</button>
+                    </form>
+                  </td>
+              </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
