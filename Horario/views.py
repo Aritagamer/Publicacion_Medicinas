@@ -11,7 +11,7 @@ from Inventario.models import Medicinas
 from Registro.models import Registro
 
 #_________________________Create your views here._____________________
-def Tabla_Horario(request,dia = None):
+def Tabla_Horario(request):
     user = request.session.get("Nombre",'')
 
     list_dia = [' ','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo']
