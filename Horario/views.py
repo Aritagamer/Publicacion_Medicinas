@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from .forms import Set_Horario
 import datetime
-
 import Methods.common as cmn
+import Horario.func.common as vm
 
 #__________________Importacion de modelos______________________________
 from Usuarios.models import Usuario
@@ -24,11 +24,18 @@ def Tabla_Horario(request):
     else:
         dia = int (datetime.date.today().isoweekday())
     
-    Medicamentos = set_Horario.objects.filter(Usuario = usuario).filter(Num_Dia = dia)
+    Medicamentos = set_Horario.objects.filter(Usuario = usuario)
+
+    med_dia = Medicamentos.filter(Num_Dia = dia)
+    no_med  = Medicamentos.filter(Num_Dia = 0)
+    all_med = Medicamentos.filter(Num_Dia = 8) | Medicamentos.filter(Num_Dia = dia)
+
+    #med_dia += all_med
+
 
     
 
-    return render(request,"Horario.html",{"user":user,"elem":Medicamentos,"dia" : list_dia[dia],"dia_index":dia})
+    return render(request,"Horario.html",{"user":user,"elem":all_med,"dia" : list_dia[dia],"dia_index":dia,"elem_none":no_med})
 
 def Give_Horario(request):
     user = request.session.get("Nombre",'')
@@ -73,24 +80,9 @@ def New_Horario(request):
         medicamento = Medicinas.objects.get( id = data.get('Medicamento') )
         usuario  = Usuario.objects.get( id = request.session.get('User_ID'))
 
-        New_Horario = set_Horario(
-            
-            Hora = data.get('Hora'),
-            Minutos = data.get('Minutos'),
-            Num_Dia = int (data.get('Dia')),
-            Medicamento = medicamento,
-            Dosis = data.get('Dosis'),
-            Usuario = usuario
-        )
+        opc = int (data.get("Opc_Hora"))
 
-        New_Horario.save()
-
-        """new_reg = Registro(
-            ID_Usuario = usuario,
-            Medicamento = medicamento,
-            Dosis = data.get('Dosis')
-        )
-        new_reg.save()"""
+        vm.Set_Mult_Horario(hour = opc,data=data,medicamento = medicamento,usuario = usuario) 
 
         return render(request,'exito.html',{"user":user,"mensaje":"Horario registrado con exito",'URL':'/hor/'})
 

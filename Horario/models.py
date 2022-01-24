@@ -17,7 +17,7 @@ class set_Horario (models.Model):
         return "%d %d:%02d"%(self.Num_Dia,self.Hora,self.Minutos) 
 
     class Meta:
-        ordering = ['Num_Dia','Hora','Minutos']
+        ordering = ['Hora','Minutos','Medicamento']
         verbose_name = "Horario"
         verbose_name_plural = "Horarios"
 

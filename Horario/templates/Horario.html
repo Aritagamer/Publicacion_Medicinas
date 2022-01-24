@@ -95,4 +95,54 @@
       </tbody>
     </table>
   </div>
+  <div class="row" >
+    <div class="col-6 ">
+      <p class = "text-start fw-bold text-wrap"  style="font-size: 2.7vh;"> Medicamentos no fijos </p>
+    </div>
+  </div>
+  <div class="table-responsive" >
+    <table class = "table table-info table-striped table-hover text-center"  style="font-size: 2.5vh;">
+      <thead>
+        <tr>
+            <th class="text-start">#</th>
+            <th class="text-start">Nombre</th>
+            <th>Dosis</th>
+            <th>Horario</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+      <tbody>
+          {% for i in elem_none %}
+              <tr>
+                  <th class="text-start">{{ forloop.counter  }}</th>
+                  <td class="text-start">{{ i.Medicamento }}</td>
+                  <td>{{ i.Dosis }}</td>
+                  <td>
+                      {{ i.Hora}} : {{i.Minutos|stringformat:"02d"}}
+                  </td>
+                  <td>
+                    <form action="/hor/give/" method="post">{% csrf_token %}
+                      <input type="hidden" name="id" value="{{ i.id }}">
+                      <button type="submit" class = "btn btn-primary mb-3" style = "font-size: 2vh;">Tomar</button>
+                    </form>
+                  </td>
+                  <td>
+                    <form action="/hor/update/" method="get">{% csrf_token %}
+                      <input type="hidden" name="id" value="{{ i.id }}">
+                      <button type="submit" class = "btn btn-primary mb-3" style = "font-size: 2vh;">Editar</button>
+                    </form>
+                  </td>
+                  <td>
+                    <form action="/hor/delete/" method="post">{% csrf_token %}
+                      <input type="hidden" name="id" value="{{ i.id }}">
+                      <button type="submit" class = "btn btn-danger mb-3" style = "font-size: 2vh;">Eliminar</button>
+                    </form>
+                  </td>
+              </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock %}
