@@ -3,13 +3,13 @@ from .forms import Dar_medicamento
 from Inventario.models import Medicinas
 from Usuarios.models import Usuario
 from .models import Registro
-
+from Methods.common import Identificar_Usuario as IU
 import datetime
 
 # Create your views here.
 def Tabla_Registro(request):
-    user = request.session.get("Nombre",'')
-    id = request.session.get("User_ID","")
+    user = IU(request)
+    id = request.session.get("Working_ID","")
 
     fecha = datetime.date.today()
 
@@ -23,10 +23,10 @@ def Tabla_Registro(request):
     return render(request,'Registros.html',{"user":user,"elem":search,"fecha":fecha})
 
 def Dar_Medicina(request):
-    user = request.session.get("Nombre",'')
+    user = IU(request)
     if user == '':
         return render(request,'error.html',{"user":user,'URL':'/'})
-    medicinas = Medicinas.objects.filter(ID_Usuario = request.session.get("User_ID"))
+    medicinas = Medicinas.objects.filter(ID_Usuario = request.session.get("Working_ID"))
     lista = [[int(i.id),i.Medicamento] for i in medicinas]
 
     if request.method  == "POST":
@@ -40,7 +40,7 @@ def Dar_Medicina(request):
 
         data = formulario.cleaned_data
         medicamento = Medicinas.objects.get( id = data.get('Medicamento') )
-        usuario  = Usuario.objects.get( id = request.session.get('User_ID'))
+        usuario  = Usuario.objects.get( id = request.session.get('Working_ID'))
         dosis = data.get('Dosis')
 
         if medicamento.Registro:

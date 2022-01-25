@@ -45,5 +45,13 @@ class Personal_Info(forms.Form):
             self.add_error('Email', "Correo electronico ya registrado")
         return cd
 
-    
+class reg_Paciente(forms.Form):
+    ID_Paciente  = forms.CharField(label = "Id del paciente",help_text="Esta informacion la puedes encontrar en su perfil",max_length=36,required=True)  
+
+    error_css_class = 'alert alert-danger'
+    #required_css_class = 'alert alert-warning'
+
+    def clean(self):
+        return self.cleaned_data
+        
     

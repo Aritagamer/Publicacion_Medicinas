@@ -3,10 +3,11 @@ from django.shortcuts import render
 from .forms import Registro
 from .models import Medicinas
 from Usuarios.models import Usuario
+from Methods.common import Identificar_Usuario as IU
 
 # Create your views here.
 def nuevo(request):
-    user = request.session.get("Nombre",'')
+    user = IU(request)
     if user == '':
         return render(request,'error.html',{"user":user,'URL':'/'})
 
@@ -18,7 +19,7 @@ def nuevo(request):
             return render(request,'Formularios.html',{"user":user,"Formulario":formulario})
 
         data = formulario.cleaned_data
-        usuario  = Usuario.objects.get(id = request.session.get("User_ID") )
+        usuario  = Usuario.objects.get(id = request.session.get("Working_ID") )
         medicina = Medicinas(
             Medicamento = data.get('Medicamento'),
             Unidades = data.get('Unidades'),
@@ -35,7 +36,7 @@ def nuevo(request):
     return render(request,'Formularios.html',{"user":user,"Formulario":f})
 
 def Editar(request):
-    user = request.session.get("Nombre",'')
+    user = IU(request)
     if user == '':
         return render(request,'error.html',{"user":user,'URL':'/'})
 
@@ -68,7 +69,7 @@ def Editar(request):
 
 
 def Eliminar(request):
-    user = request.session.get("Nombre",'')
+    user = IU(request)
     if user == '':
         return render(request,'error.html',{"user":user,'URL':'/'})
     if request.method == "POST":
@@ -80,8 +81,8 @@ def Eliminar(request):
 
 
 def Inventario(request):
-    user = request.session.get("Nombre",'')
-    id = request.session.get("User_ID","")
+    user = IU(request)
+    id = request.session.get("Working_ID","")
 
     search = Medicinas.objects.filter(ID_Usuario = id)
     return render(request,'Inventario.html',{"user":user,"elem":search})

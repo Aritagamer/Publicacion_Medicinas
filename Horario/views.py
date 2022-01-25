@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import Set_Horario
 import datetime
-import Methods.common as cmn
+from Methods.common import Identificar_Usuario as IU
 import Horario.func.common as vm
 
 #__________________Importacion de modelos______________________________
@@ -12,12 +12,12 @@ from Registro.models import Registro
 
 #_________________________Create your views here._____________________
 def Tabla_Horario(request):
-    user = request.session.get("Nombre",'')
+    user = IU(request)
 
     list_dia = [' ','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo']
     if user == '':
         return render(request,'error.html',{"user":user,'URL':'/'})
-    usuario = Usuario.objects.get(id = request.session.get("User_ID",''))
+    usuario = Usuario.objects.get(id = request.session.get("Working_ID",''))
 
     if request.method == 'POST':
         dia  = int (request.POST.get('dia_sel',""))
@@ -26,25 +26,18 @@ def Tabla_Horario(request):
     
     Medicamentos = set_Horario.objects.filter(Usuario = usuario)
 
-    med_dia = Medicamentos.filter(Num_Dia = dia)
     no_med  = Medicamentos.filter(Num_Dia = 0)
     all_med = Medicamentos.filter(Num_Dia = 8) | Medicamentos.filter(Num_Dia = dia)
-
-    #med_dia += all_med
-
-
-    
 
     return render(request,"Horario.html",{"user":user,"elem":all_med,"dia" : list_dia[dia],"dia_index":dia,"elem_none":no_med})
 
 def Give_Horario(request):
-    user = request.session.get("Nombre",'')
+    user = IU(request)
     if user == '':
         return render(request,'error.html',{"user":user,'URL':'/'})
     
     horario  = set_Horario.objects.get(id = request.POST.get("id",""))
     
-
     if horario.Medicamento.Registro:
         horario.Medicamento.Unidades = float( horario.Medicamento.Unidades ) - float(horario.Dosis)
         horario.Medicamento.save()
@@ -60,11 +53,11 @@ def Give_Horario(request):
     
 
 def New_Horario(request):
-    user = request.session.get("Nombre",'')
+    user = IU(request)
     if user == '':
         return render(request,'error.html',{"user":user,'URL':'/'})
 
-    medicinas = Medicinas.objects.filter(ID_Usuario = request.session.get("User_ID"))
+    medicinas = Medicinas.objects.filter(ID_Usuario = request.session.get("Working_ID"))
     lista = [[int(i.id),i.Medicamento] for i in medicinas]
     
     if request.method  == "POST":
@@ -78,7 +71,7 @@ def New_Horario(request):
 
         data = formulario.cleaned_data
         medicamento = Medicinas.objects.get( id = data.get('Medicamento') )
-        usuario  = Usuario.objects.get( id = request.session.get('User_ID'))
+        usuario  = Usuario.objects.get( id = request.session.get('Working_ID'))
 
         opc = int (data.get("Opc_Hora"))
 
@@ -93,11 +86,11 @@ def New_Horario(request):
     return render(request,'Formularios.html',{"user":user,"Formulario":f})
 
 def Update_Horario(request):
-    user = request.session.get("Nombre",'')
+    user = IU(request)
     if user == '':
         return render(request,'error.html',{"user":user,'URL':'/'})
 
-    medicinas = Medicinas.objects.filter(ID_Usuario = request.session.get("User_ID"))
+    medicinas = Medicinas.objects.filter(ID_Usuario = request.session.get("Working_ID"))
     lista = [[int(i.id),i.Medicamento] for i in medicinas]
 
     if request.method  == "POST":
@@ -137,7 +130,7 @@ def Update_Horario(request):
 
 
 def Delete_Horario(request):
-    user = request.session.get("Nombre",'')
+    user = IU(request)
     if user == '':
         
         return render(request,'error.html',{"user":user,'URL':'/'})
