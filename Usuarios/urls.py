@@ -7,5 +7,6 @@ urlpatterns = [
     path('sign_in/',views.Iniciar),
     path('logged/',views.Iniciado),
     path('log_out/',views.Salir),
-    path('pac/',views.Pac_Users)
+    path('pac/',views.Pac_Users),
+    path('cagaste/',views.cagaste)
 ]

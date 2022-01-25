@@ -1,4 +1,5 @@
 import re
+import uuid
 from django.forms import ValidationError
 from django.shortcuts import render
 from Methods.common import Identificar_Usuario as IU
@@ -75,6 +76,15 @@ def Salir(request):
 
     request.session.flush()
     return render(request,"exito.html",{"user":'',"mensaje":"Sesion cerrada correctamente",'URL':'/'})
+def cagaste(request):
+    user = IU(request)
+    usuario  = Usuario.objects.get(id = request.session.get("User_ID"))
+    usuario.ID_Paciente = uuid.uuid4()
+    usuario.save()
+    print(usuario.ID_Paciente)
+
+    return render(request,"exito.html",{"user":user,"mensaje":"ID Cambiado con exito",'URL':'/users/'})
+
 
 def Pac_Users(request):
     user = IU(request)
