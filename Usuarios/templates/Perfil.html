@@ -31,7 +31,7 @@
                                                 {{Formulario.ID_Paciente}}
                                             </div>
                                             <div class="col-3">
-                                                <button type="submit" class = "btn btn-primary mx-auto" >Agregar</button>
+                                                <button type="submit" class = "btn btn-primary mx-auto texto" >Agregar</button>
                                             </div>
                                         </div>
                                         
@@ -51,12 +51,12 @@
                                     {% elif i.Paciente.id != working %}
                                         <form action="" method="post">{% csrf_token %}
                                             <input type="hidden" name="id_admin" value="{{ i.Paciente.id }}">
-                                            <button type="submit" class = "btn btn-primary mx-auto" >Administrar</button>
+                                            <button type="submit" class = "btn btn-primary mx-auto texto" >Administrar</button>
                                         </form>
                                     {% elif i.Paciente.id == working %}
                                         <form action="" method="post">{% csrf_token %}
                                             <input type="hidden" name="id_admin" value="{{ userw.id }}">
-                                            <button type="submit" class = "btn btn-danger mx-auto" >Volver</button>
+                                            <button type="submit" class = "btn btn-danger mx-auto texto" >Volver</button>
                                         </form>
                                     {% endif %}
                                 </div>

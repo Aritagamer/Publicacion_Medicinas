@@ -26,7 +26,7 @@ def Tabla_Registro(request):
             if not formulario.is_valid():
                 
                 formulario.fields['Medicamento'].widget.choices = lista
-                return render(request,'Registro_Form.html',{"user":user,"Formulario":formulario})
+                return render(request,'Registros.html',{"user":user,"Formulario":formulario})
 
             data = formulario.cleaned_data
             medicamento = Medicinas.objects.get( id = data.get('Medicamento') )
