@@ -122,6 +122,7 @@ def Update_Horario(request):
     
     f = Set_Horario(auto_id=True)
     f.fields['Medicamento'].widget.choices = lista
+    f.fields['Medicamento'].initial = Horario_Edit.Medicamento.id
     f.fields["Dia"].initial = Horario_Edit.Num_Dia
     f.fields["Dosis"].initial = Horario_Edit.Dosis
     f.fields["Hora"].initial = Horario_Edit.Hora
