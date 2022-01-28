@@ -1,0 +1,92 @@
+
+{% extends 'Base/template.html' %}
+{% load static %}
+{% block titulo %}
+  <title>Registrarse</title>
+{% endblock %}
+
+{% block contenido %}
+
+
+
+  <form action="" method="post">{% csrf_token %}
+    <div class="container-fluid">
+        <div class="row row_form">
+
+            <div class="col-lg-5 {% if  Formulario.Nombre.errors %} alert alert-danger {% endif %}">
+                <div class="row row_form">
+
+                    <div class="col-4">
+                        <label for="{{Formulario.Nombre.id_for_label}}" class="texto">
+                            {{Formulario.Nombre.label}}
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        {{Formulario.Nombre}} {{Formulario.Nombre.errors}}
+                    </div>
+
+                </div>
+            </div>
+            
+            <div class="col-lg-3 {% if  Formulario.Fecha_Nac.errors %} alert alert-danger {% endif %}">
+                <div class="row row_form">
+                    <div class="col-4">
+                        <label for="{{Formulario.Fecha_Nac.id_for_label}}" class="texto">
+                            {{Formulario.Fecha_Nac.label}}
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        {{Formulario.Fecha_Nac}} {{Formulario.Fecha_Nac.errors}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 {% if  Formulario.Email.errors %} alert alert-danger {% endif %}">
+                <div class="row row_form">
+                    <div class="col-2">
+                        <label for="{{Formulario.Email.id_for_label}}" class="texto">
+                            {{Formulario.Email.label}}
+                        </label>
+                    </div>
+                    <div class="col-10">
+                        {{Formulario.Email}} {{Formulario.Email.errors}}
+                    </div>
+                </div>
+                
+            </div>
+        <div class="row row_form">
+            <div class="col-lg-6 {% if  Formulario.Password.errors %} alert alert-danger {% endif %}">
+                <div class="row row_form">
+                    <div class="col-2">
+                        <label for="{{Formulario.Password.id_for_label}}" class="texto">
+                            {{Formulario.Password.label}}
+                        </label>
+                    </div>
+                    <div class="col-10">
+                        {{Formulario.Password}} {{Formulario.Password.errors}}
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-lg-6 {% if  Formulario.Confirm_Password.errors %} alert alert-danger {% endif %}">
+                <div class="row row_form">
+                    <div class="col-4">
+                        <label for="{{Formulario.Confirm_Password.id_for_label}}" class="texto">
+                            {{Formulario.Confirm_Password.label}}
+                        </label>
+                    </div>
+                    <div class="col-8">
+                        {{Formulario.Confirm_Password}} {{Formulario.Confirm_Password.errors}}
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+            
+
+        </div>
+      
+      <button type="submit" value="Enviar" class = "btn btn-primary mb-3" style="font-size: 2.5vh;">Enviar</button>
+    </div>
+  </form>
+{% endblock %}

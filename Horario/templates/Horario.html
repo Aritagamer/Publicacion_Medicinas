@@ -10,54 +10,54 @@
   <div class="container-fluid" >
     <div class="row" >
       <div class="col-6 ">
-        <p class = "text-start fw-bold text-wrap"  style="font-size: 2.7vh;"> Horario del dia {{ dia}} </p>
+        <h1 class = "text-start fw-bold text-wrap"> Horario del dia {{ dia}} </p>
       </div>
       <div class="col-6">
         <ul class="nav justify-content-end">
       
           <li class="nav-item">
-            <a class="btn btn-primary" aria-current="page" href="/hor/new/"  style="font-size: 2.5vh;">Agregar horario</a>
+            <a class="btn btn-primary texto" aria-current="page" href="/hor/new/">Agregar horario</a>
           </li>
         </ul>
       </div>
     </div>
     <div class="row">
         <form action="" method="post">{% csrf_token %}
-            <div class="btn-group btn-group-sm" role="group" aria-label="Basic radio toggle button group" style="font-size: 2.5vh;">
+            <div class="btn-group btn-group-sm texto" role="group" aria-label="Basic radio toggle button group" >
             
-                <input type="radio" class="btn-check" name="dia_sel" value = "1" id="dia_sel1" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 1 %} checked {% endif %}>
-                <label class="btn btn-outline-primary" for="dia_sel1" style="font-size: 2vh;">Lunes</label>
+                <input type="radio" class="btn-check texto" name="dia_sel" value = "1" id="dia_sel1" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 1 %} checked {% endif %}>
+                <label class="btn btn-outline-primary texto"  for="dia_sel1" >Lunes</label>
               
-                <input type="radio" class="btn-check" name="dia_sel" value = "2" id="dia_sel2" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 2 %} checked {% endif %}>
-                <label class="btn btn-outline-primary" for="dia_sel2" style="font-size: 2vh;">Martes</label>
+                <input type="radio" class="btn-check texto" name="dia_sel" value = "2" id="dia_sel2" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 2 %} checked {% endif %}>
+                <label class="btn btn-outline-primary texto"  for="dia_sel2" >Martes</label>
               
-                <input type="radio" class="btn-check" name="dia_sel" value = "3" id="dia_sel3" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 3 %} checked {% endif %}>
-                <label class="btn btn-outline-primary" for="dia_sel3" style="font-size: 2vh;">Miercoles</label>
+                <input type="radio" class="btn-check texto" name="dia_sel" value = "3" id="dia_sel3" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 3 %} checked {% endif %}>
+                <label class="btn btn-outline-primary texto" for="dia_sel3" >Miercoles</label>
     
-                <input type="radio" class="btn-check" name="dia_sel" value = "4" id="dia_sel4" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 4 %} checked {% endif %}>
-                <label class="btn btn-outline-primary" for="dia_sel4" style="font-size: 2vh;">Jueves</label>
+                <input type="radio" class="btn-check texto" name="dia_sel" value = "4" id="dia_sel4" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 4 %} checked {% endif %}>
+                <label class="btn btn-outline-primary texto" for="dia_sel4" >Jueves</label>
     
-                <input type="radio" class="btn-check" name="dia_sel" value = "5" id="dia_sel5" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 5 %} checked {% endif %}>
-                <label class="btn btn-outline-primary" for="dia_sel5" style="font-size: 2vh;">Viernes</label>
+                <input type="radio" class="btn-check texto" name="dia_sel" value = "5" id="dia_sel5" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 5 %} checked {% endif %}>
+                <label class="btn btn-outline-primary texto" for="dia_sel5" >Viernes</label>
     
-                <input type="radio" class="btn-check" name="dia_sel" value = "6" id="dia_sel6" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 6 %} checked {% endif %}>
-                <label class="btn btn-outline-primary" for="dia_sel6" style="font-size: 2vh;">Sabado</label>
+                <input type="radio" class="btn-check texto" name="dia_sel" value = "6" id="dia_sel6" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 6 %} checked {% endif %}>
+                <label class="btn btn-outline-primary texto" for="dia_sel6" >Sabado</label>
     
-                <input type="radio" class="btn-check" name="dia_sel" value = "7" id="dia_sel7" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 7 %} checked {% endif %}>
-                <label class="btn btn-outline-primary" for="dia_sel7" style="font-size: 2vh;">Domigo</label>
+                <input type="radio" class="btn-check texto" name="dia_sel" value = "7" id="dia_sel7" autocomplete="off" onclick="this.form.submit()" {% if dia_index == 7 %} checked {% endif %}>
+                <label class="btn btn-outline-primary texto" for="dia_sel7" >Domigo</label>
             
             </div>
             </form>
     </div>
   </div>
   <div class="table-responsive" >
-    <table class = "table table-info table-striped table-hover text-center"  style="font-size: 2.5vh;">
+    <table class = "table table-info table-striped table-hover text-center"  >
       <thead>
           <tr>
-              <th class="text-start">#</th>
-              <th class="text-start">Nombre</th>
-              <th>Dosis</th>
-              <th>Horario</th>
+              <th class="text-start title_table_texto">#</th>
+              <th class="text-start title_table_texto">Nombre</th>
+              <th class="title_table_texto">Dosis</th>
+              <th class="title_table_texto">Horario</th>
               <th></th>
               <th></th>
               <th></th>
@@ -66,28 +66,28 @@
       <tbody>
           {% for i in elem %}
               <tr>
-                  <th class="text-start">{{ forloop.counter  }}</th>
-                  <td class="text-start">{{ i.Medicamento }}</td>
-                  <td>{{ i.Dosis }}</td>
-                  <td>
+                  <th class="text-start table_texto">{{ forloop.counter  }}</th>
+                  <td class="text-start table_texto">{{ i.Medicamento }}</td>
+                  <td class="table_texto">{{ i.Dosis }}</td>
+                  <td class="table_texto">
                       {{ i.Hora}} : {{i.Minutos|stringformat:"02d"}}
                   </td>
                   <td>
                     <form action="/hor/give/" method="post">{% csrf_token %}
                       <input type="hidden" name="id" value="{{ i.id }}">
-                      <button type="submit" class = "btn btn-primary mb-3" style = "font-size: 2vh;">Tomar</button>
+                      <button type="submit" class = "btn btn-primary mb-3 table_texto" >Tomar</button>
                     </form>
                   </td>
                   <td>
                     <form action="/hor/update/" method="get">{% csrf_token %}
                       <input type="hidden" name="id" value="{{ i.id }}">
-                      <button type="submit" class = "btn btn-primary mb-3" style = "font-size: 2vh;">Editar</button>
+                      <button type="submit" class = "btn btn-primary mb-3 table_texto" >Editar</button>
                     </form>
                   </td>
                   <td>
                     <form action="/hor/delete/" method="post">{% csrf_token %}
                       <input type="hidden" name="id" value="{{ i.id }}">
-                      <button type="submit" class = "btn btn-danger mb-3" style = "font-size: 2vh;">Eliminar</button>
+                      <button type="submit" class = "btn btn-danger mb-3 table_texto" >Eliminar</button>
                     </form>
                   </td>
               </tr>
@@ -97,17 +97,17 @@
   </div>
   <div class="row" >
     <div class="col-6 ">
-      <p class = "text-start fw-bold text-wrap"  style="font-size: 2.7vh;"> Medicamentos no fijos </p>
+      <h2 class = "text-start fw-bold text-wrap"> Medicamentos no fijos </p>
     </div>
   </div>
   <div class="table-responsive" >
-    <table class = "table table-info table-striped table-hover text-center"  style="font-size: 2.5vh;">
+    <table class = "table table-info table-striped table-hover text-center"  >
       <thead>
         <tr>
-            <th class="text-start">#</th>
-            <th class="text-start">Nombre</th>
-            <th>Dosis</th>
-            <th>Horario</th>
+            <th class="text-start title_table_texto">#</th>
+            <th class="text-start title_table_texto">Nombre</th>
+            <th class="title_table_texto">Dosis</th>
+            <th class="title_table_texto">Horario</th>
             <th></th>
             <th></th>
             <th></th>
@@ -116,28 +116,28 @@
       <tbody>
           {% for i in elem_none %}
               <tr>
-                  <th class="text-start">{{ forloop.counter  }}</th>
-                  <td class="text-start">{{ i.Medicamento }}</td>
-                  <td>{{ i.Dosis }}</td>
-                  <td>
+                  <th class="text-start table_texto">{{ forloop.counter  }}</th>
+                  <td class="text-start table_texto" >{{ i.Medicamento }}</td>
+                  <td class="table_texto">{{ i.Dosis }}</td>
+                  <td class="table_texto">
                       {{ i.Hora}} : {{i.Minutos|stringformat:"02d"}}
                   </td>
                   <td>
                     <form action="/hor/give/" method="post">{% csrf_token %}
                       <input type="hidden" name="id" value="{{ i.id }}">
-                      <button type="submit" class = "btn btn-primary mb-3" style = "font-size: 2vh;">Tomar</button>
+                      <button type="submit" class = "btn btn-primary mb-3 table_texto" >Tomar</button>
                     </form>
                   </td>
                   <td>
                     <form action="/hor/update/" method="get">{% csrf_token %}
                       <input type="hidden" name="id" value="{{ i.id }}">
-                      <button type="submit" class = "btn btn-primary mb-3" style = "font-size: 2vh;">Editar</button>
+                      <button type="submit" class = "btn btn-primary mb-3 table_texto">Editar</button>
                     </form>
                   </td>
                   <td>
                     <form action="/hor/delete/" method="post">{% csrf_token %}
                       <input type="hidden" name="id" value="{{ i.id }}">
-                      <button type="submit" class = "btn btn-danger mb-3" style = "font-size: 2vh;">Eliminar</button>
+                      <button type="submit" class = "btn btn-danger mb-3 table_texto">Eliminar</button>
                     </form>
                   </td>
               </tr>

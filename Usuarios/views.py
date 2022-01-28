@@ -1,4 +1,3 @@
-import re
 import uuid
 from django.forms import ValidationError
 from django.shortcuts import render
@@ -18,7 +17,7 @@ def Registrarse(request):
         formulario = Personal_Info(request.POST)
 
         if not formulario.is_valid():
-            return render(request,"Formularios.html",{"user":user,"Formulario":formulario})
+            return render(request,"Usuario_Registro_Form.html",{"user":user,"Formulario":formulario})
         usuario = Usuario(
             Nombre = formulario.cleaned_data["Nombre"],
             Password = generate_password_hash(formulario.cleaned_data["Password"]),
@@ -34,7 +33,7 @@ def Registrarse(request):
         return render(request,"exito.html",{"user":user,'mensaje':'Nuevo usuario %s registrado correctamente'%(formulario.cleaned_data["Nombre"]),'URL':'/'})   
 
     f = Personal_Info(auto_id=True)
-    return render(request,"Formularios.html",{"user":user,"Formulario":f})
+    return render(request,"Usuario_Registro_Form.html",{"user":user,"Formulario":f})
 
 def Iniciar(request):
     user = IU(request)
@@ -44,7 +43,7 @@ def Iniciar(request):
 
         if not formulario.is_valid():
 
-            return render(request,"Formularios.html",{"user":user,"Formulario":formulario})
+            return render(request,"Usuario_Loggin_Form.html",{"user":user,"Formulario":formulario})
 
         
         usuario = Usuario.objects.get(Email = formulario.cleaned_data['Email'])            
@@ -62,8 +61,8 @@ def Iniciar(request):
             })
     
     f = registro(auto_id=True)
-    return render(request,"Formularios.html",{"user":user,"Formulario":f})
-
+    return render(request,"Usuario_Loggin_Form.html",{"user":user,"Formulario":f})
+'''
 def Iniciado(request):
     user = request.session.get("Nombre",'')
     return render(request,"exito.html",{"user":user,"mensaje":"Bienvenido %s inicio de session correcto"%(user)})
@@ -71,17 +70,17 @@ def Iniciado(request):
 def Registrado(request):
     user = request.session.get("Nombre",'')
     return render(request,"exito.html",{"user":user,"mensaje":"Nuevo usuario %s registrado correctamente"%(user)})
-
+'''
 def Salir(request):
 
     request.session.flush()
     return render(request,"exito.html",{"user":'',"mensaje":"Sesion cerrada correctamente",'URL':'/'})
+
 def cagaste(request):
     user = IU(request)
     usuario  = Usuario.objects.get(id = request.session.get("User_ID"))
     usuario.ID_Paciente = uuid.uuid4()
     usuario.save()
-    print(usuario.ID_Paciente)
 
     return render(request,"exito.html",{"user":user,"mensaje":"ID Cambiado con exito",'URL':'/users/'})
 
@@ -138,10 +137,13 @@ def perfil_Users(request):
         
         return render(request,'error.html',{"user":user,'URL':'/'})
 
+    usuario  = Usuario.objects.get(id = request.session.get("User_ID"))
+    
     if request.method == "POST":
         rel_ID = request.POST.get('id','')
         rechazado  = request.POST.get('none','')
         admin_ID = request.POST.get('id_admin','')
+        Paciente  = request.POST.get('ID_Paciente','')
         
         if rel_ID != '':
             relacion = rel_Pacientes.objects.get(id = rel_ID)
@@ -157,11 +159,37 @@ def perfil_Users(request):
             usuario_name  = Usuario.objects.get(id = admin_ID)
 
             request.session['Working_Name'] = usuario_name.Nombre
+        elif Paciente != '':
+
+            formulario = reg_Paciente(request.POST)
+            if not formulario.is_valid():
+
+                return render(request,"Perfil.html",{"user":user,"Formulario":formulario})
+
+            data = formulario.cleaned_data
+
+            try:
+
+                paciente = Usuario.objects.get(ID_Paciente = data.get('ID_Paciente'))
+            
+            except ValidationError as e:
+
+                return render(request,"error.html",{"user":user,"mensaje":"ID de Usuario no encontrado","url":"/users/"})
+
+            if not rel_Pacientes.objects.filter(Cuidador = usuario).filter(Paciente  = paciente):
+
+                new_relation = rel_Pacientes(
+                    Cuidador = usuario,
+                    Paciente = paciente,
+                    Aceptado = False
+                )
+
+                new_relation.save()
 
         
     if request.session.get("Working_ID","") != request.session.get("User_ID",""):
         user = "%s (%s)"%(request.session.get("Nombre",''),request.session.get("Working_Name",''))
 
-    usuario  = Usuario.objects.get(id = request.session.get("User_ID"))
     
-    return render(request,"Perfil.html",{"user":user,"userw":usuario,"working":int (request.session.get("Working_ID",''))})
+    formulario = reg_Paciente(auto_id=True)
+    return render(request,"Perfil.html",{"user":user,"userw":usuario,"Formulario":formulario,"working":int (request.session.get("Working_ID",''))})

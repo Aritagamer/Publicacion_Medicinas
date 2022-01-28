@@ -1,0 +1,36 @@
+
+{% extends 'Base/template.html' %}
+{% load static %}
+{% block titulo %}
+  <title>Inicio de sesion</title>
+{% endblock %}
+
+{% block contenido %}
+
+  <form action="" method="post">{% csrf_token %}
+    <div class="container-fluid">
+        <div class="row row_form">
+            <div class="col-lg-6 {% if  Formulario.Email.errors %} alert alert-danger {% endif %}">
+                <label for="{{Formulario.Email.id_for_label}}" class="texto">
+                    {{Formulario.Email.label}}
+                </label>
+                <span class="texto">
+                    {{Formulario.Email}} {{Formulario.Email.errors}}
+                </span>
+            </div>
+            <div class="col-lg-6 {% if  Formulario.Password.errors %} alert alert-danger {% endif %}">
+                <label for="{{Formulario.Password.id_for_label}}" class="texto">
+                    {{Formulario.Password.label}}
+                </label>
+                <span class="texto">
+                    {{Formulario.Password}} {{Formulario.Password.errors}}
+                </span>
+            </div>
+        </div>
+        
+      
+      <button type="submit" value="Enviar" class = "btn btn-primary mb-3" style="font-size: 2.5vh;">Enviar</button>
+    </div>
+  </form>
+
+{% endblock %}

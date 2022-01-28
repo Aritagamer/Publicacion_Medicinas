@@ -7,43 +7,71 @@
 {% block contenido %}
 
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-4">
-        <p class = "text-start fw-bold text-wrap"  style="font-size: 2.7vh;"> Registro del dia {{ fecha }}</p>
+      <div class="col-lg-5">
+        <h2 class = "text-start fw-bold text-wrap"> Registro del dia {{ fecha }}</h2>
       </div>
-      <div class="col-8">
-        <ul class="nav justify-content-end">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page"  style="font-size: 2.5vh;" href="/reg/give/">Dar Medicamento</a>
-          </li>
-          <li class="nav-item">
-            <form action="" method="post" class="input-group mb-3">{% csrf_token %}
-              <button type="submit" class="btn btn-primary"  style="font-size: 2.5vh;">Buscar</button>
-              <input type="date" name="search" id="fecha" class="form-control"  style="font-size: 2.5vh;">
+      <div class="col-lg-7">
+        <div class="row justify-content-end">
+          <div class="col-7 tabledf py-1">
+            <form action="" method="post">{% csrf_token %}  
+              <div class="row {% if  Formulario.Medicamento.errors %} alert alert-danger {% endif %}">
+                
+                <div class="col-4">
+                    <label for="{{Formulario.Medicamento.id_for_label}}" class="texto">
+                        {{Formulario.Medicamento.label}}
+                    </label>
+                </div>
+                <div class="col-8">
+                    {{Formulario.Medicamento}} {{Formulario.Medicamento.errors}}
+                </div>
+
+              </div>
+              
+              <div class="row row_form {% if  Formulario.Dosis.errors %} alert alert-danger {% endif %}">
+                  
+                    <div class="col-2">
+                        <label for="{{Formulario.Dosis.id_for_label}}" class="texto">
+                            {{Formulario.Dosis.label}}
+                        </label>
+                    </div>
+                    <div class="col-3">
+                        {{Formulario.Dosis}} {{Formulario.Dosis.errors}}
+                    </div>
+                  
+              </div>
+            
+              <button type="submit" value="Enviar" class = "btn btn-primary mb-3" style="font-size: 2.5vh;">Enviar</button>
             </form>
-          </li>
-        </ul>
+          </div>
+          <div class="col-5">
+            <form action="" method="post" class="input-group mb-3">{% csrf_token %}
+              <input type="date" name="search" id="fecha" class="form-control texto"  >
+              <button type="submit" class="btn btn-primary texto"  >Buscar</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <div class="table-responsive">
-    <table class = "table table-info table-striped table-hover"  style="font-size: 2.5vh;">
+    <table class = "table table-info table-striped table-hover"  >
       <thead>
           <tr>
-              <th>#</th>
-              <th>Medicamento</th>
-              <th>Dosis</th>
-              <th>Fecha y Hora</th>
+              <th class="title_table_texto">#</th>
+              <th class="title_table_texto">Medicamento</th>
+              <th class="title_table_texto">Dosis</th>
+              <th class="title_table_texto">Fecha y Hora</th>
           </tr>
       </thead>
       <tbody>
           {% for i in elem %}
               <tr>
-                  <th>{{ forloop.counter  }}</th>
-                  <td>{{ i.Medicamento }}</td>
-                  <td>{{ i.Dosis }}</td>
-                  <td>{{ i.Fecha_Hora}}</td>
+                  <th class="table_texto">{{ forloop.counter  }}</th>
+                  <td class="table_texto">{{ i.Medicamento }}</td>
+                  <td class="table_texto">{{ i.Dosis }}</td>
+                  <td class="table_texto">{{ i.Fecha_Hora}}</td>
               </tr>
           {% endfor %}
       </tbody>

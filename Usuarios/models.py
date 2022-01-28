@@ -1,8 +1,6 @@
 from django.db import models
 import uuid
 
-from numpy import delete
-
 # Create your models here.
 
 class Usuario (models.Model):

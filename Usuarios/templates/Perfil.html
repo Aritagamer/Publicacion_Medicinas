@@ -1,7 +1,7 @@
 {% extends 'Base/template.html' %}
 {% load static %}
 {% block titulo %}
-  <title> {{ user.Nombre }} </title>
+  <title> {{ userw.Nombre }} </title>
 {% endblock %}
 
 {% block contenido %}
@@ -9,33 +9,54 @@
     <div class="container-fluid">
         <div class="align-middle">
             <h1 class="fw-bold text-center">{{ userw.Nombre }}</h1>
-            <h2 class="text-secondary text-center fs-5" data-bs-toggle="popover" data-bs-placement="bottom" title="Id de paciente" data-bs-content="Compartelo este id con la gente que puede llevar control de tus medicamentos">ID de paciente: {{ userw.ID_Paciente }}</h2>
+            <h2 class="text-secondary text-center" data-bs-toggle="popover" data-bs-placement="bottom" title="Id de paciente" data-bs-content="Compartelo este id con la gente que puede llevar control de tus medicamentos" data-bs-custom-class="pop" >ID de paciente: {{ userw.ID_Paciente }}</h2>
         </div>
         <div class="row">
-            <div class="col-md-auto">Fecha de nacimiento: </div>
-            <div class="col-lg-6">{{ userw.Fecha_Nac }}</div>
+            <div class="col-md-auto texto"> Fecha de nacimiento: </div>
+            <div class="col-lg-6 texto">{{ userw.Fecha_Nac }}</div>
         </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-5">
-                    <p class="fs-3">Pacientes:</p>
+                    <p class="fw-bold texto">Pacientes:</p>
                     <ul class="list-group ">
+                        <li  class="list-group-item">
+                            <div class="row">
+                                <div class="col-3 texto">Agregar paciente</div>
+                                <div class="col-9 texto">
+                                    
+                                    <form action="" method="post">{% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-9">
+                                                {{Formulario.ID_Paciente}}
+                                            </div>
+                                            <div class="col-3">
+                                                <button type="submit" class = "btn btn-primary mx-auto" >Agregar</button>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </li>
                         {% for i in userw.rel_pacientes_Cuidador.all %}
                         <li  class="list-group-item">
                             <div class="row">
-                                <div class="col-6">{{ i }}</div>
-                                <div class="col-6">
+                                <div class="col-6 texto">{{ i }}</div>
+                                <div class="col-6 texto">
                                     {% if not i.Aceptado %}
                                         Pendiente 
                                     {% elif i.Paciente.id != working %}
                                         <form action="" method="post">{% csrf_token %}
                                             <input type="hidden" name="id_admin" value="{{ i.Paciente.id }}">
-                                            <button type="submit" class = "btn btn-primary mx-auto" style = "font-size: 2.5vh;">Administrar</button>
+                                            <button type="submit" class = "btn btn-primary mx-auto" >Administrar</button>
                                         </form>
                                     {% elif i.Paciente.id == working %}
                                         <form action="" method="post">{% csrf_token %}
                                             <input type="hidden" name="id_admin" value="{{ userw.id }}">
-                                            <button type="submit" class = "btn btn-danger mx-auto" style = "font-size: 2.5vh;">Volver</button>
+                                            <button type="submit" class = "btn btn-danger mx-auto" >Volver</button>
                                         </form>
                                     {% endif %}
                                 </div>
@@ -47,25 +68,25 @@
                 <div class="col-lg-2">   
                 </div>
                 <div class="col-lg-5">
-                    <p class="fs-3">Cuidadores:</p>
+                    <p class="fw-bold texto">Cuidadores:</p>
                     <ul class="list-group ">
                         {% for i in userw.rel_pacientes_Paciente.all %}
                         <li  class="list-group-item"> 
                             <div class="row">
-                                <div class="col-6 text-start">{{ i.Cuidador }}</div>
-                                <div class="col-3">
+                                <div class="col-6 text-start texto">{{ i.Cuidador }}</div>
+                                <div class="col-3 texto">
                                     {% if not i.Aceptado %}
                                         <form action="" method="post">{% csrf_token %}
                                             <input type="hidden" name="id" value="{{ i.id }}">
-                                            <button type="submit" class = "btn btn-primary mx-auto" style = "font-size: 2.5vh;">Aceptar</button>
+                                            <button type="submit" class = "btn btn-primary mx-auto" >Aceptar</button>
                                         </form> 
                                     {% endif %}
                                 </div>
-                                <div class="col-3">
+                                <div class="col-3 texto">
                                     {% if not i.Aceptado %}
                                         <form action="" method="post">{% csrf_token %}
                                             <input type="hidden" name="none" value = "{{ i.id }}">
-                                            <button type="submit" class = "btn btn-danger mx-auto" style = "font-size: 2.5vh;">Rechazar</button>
+                                            <button type="submit" class = "btn btn-danger mx-auto" >Rechazar</button>
                                         </form> 
                                     {% endif %}
                                 </div>

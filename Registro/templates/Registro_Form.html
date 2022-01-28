@@ -1,0 +1,50 @@
+
+{% extends 'Base/template.html' %}
+{% load static %}
+{% block titulo %}
+  <title>Dar Medicamento</title>
+{% endblock %}
+
+{% block contenido %}
+
+
+
+  <form action="" method="post">{% csrf_token %}
+    <div class="container-fluid">
+        <div class="row row_form">
+
+            <div class="col-lg-5 {% if  Formulario.Medicamento.errors %} alert alert-danger {% endif %}">
+                <div class="row row_form">
+
+                    <div class="col-3">
+                        <label for="{{Formulario.Medicamento.id_for_label}}" class="texto">
+                            {{Formulario.Medicamento.label}}
+                        </label>
+                    </div>
+                    <div class="col-9">
+                        {{Formulario.Medicamento}} {{Formulario.Medicamento.errors}}
+                    </div>
+
+                </div>
+            </div>
+            
+            <div class="col-lg-7 {% if  Formulario.Dosis.errors %} alert alert-danger {% endif %}">
+                <div class="row row_form">
+                    <div class="col-2">
+                        <label for="{{Formulario.Dosis.id_for_label}}" class="texto">
+                            {{Formulario.Dosis.label}}
+                        </label>
+                    </div>
+                    <div class="col-3">
+                        {{Formulario.Dosis}} {{Formulario.Dosis.errors}}
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+      
+      <button type="submit" value="Enviar" class = "btn btn-primary mb-3" style="font-size: 2.5vh;">Enviar</button>
+    </div>
+  </form>
+{% endblock %}

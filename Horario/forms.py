@@ -11,8 +11,8 @@ class Set_Horario(forms.Form):
         [6,"Sabado"],
         [7,"Domingo"],
         [8,"Diario"]
-        ])
-    Opc_Hora  = forms.ChoiceField(label = "Tipo de horario",required=True,choices=[
+        ],widget=forms.Select(attrs={'class' : 'form-select texto input_texto'}))
+    Opc_Hora  = forms.ChoiceField(label = "Tipo de horario",initial=24,required=True,choices=[
         [24,"Esta hora"],
         [12,"Cada 12 horas"],
         [8,"Cada 8 horas"],
@@ -21,11 +21,11 @@ class Set_Horario(forms.Form):
         [2,"Cada 2 horas"],
         [1,"Cada hora"]
         ],
-        widget=forms.RadioSelect())
-    Hora = forms.IntegerField(label="Hora",max_value=24,min_value=0)
-    Minutos = forms.IntegerField(label="Minutos",max_value=60,min_value=0)
-    Medicamento = forms.CharField(label="Medicamento",required=True, widget=forms.Select(attrs={'class' : 'form-select', "style":"width: 50vw; font-size: 2.5vh;"}))
-    Dosis  = forms.FloatField(min_value=0, label="Dosis",localize=False,widget=forms.NumberInput(attrs={'class':'form-control', "style":"width: 10vw; font-size: 2.5vh;"}))
+        widget=forms.RadioSelect(attrs={'class' : 'form-check-input texto '}))
+    Hora = forms.IntegerField(label="Hora",max_value=24,min_value=0,widget=forms.NumberInput(attrs={'class':'texto form-control input_texto', 'pattern':'[0-2][0-9]','placeholder':'00'}))
+    Minutos = forms.IntegerField(label="Minutos",max_value=60,min_value=0,widget=forms.NumberInput(attrs={'class':'form-control input_texto texto', 'pattern':'[0-6][0-9]','placeholder':'00'}))
+    Medicamento = forms.CharField(label="Medicamento",required=True, widget=forms.Select(attrs={'class' : 'form-select texto input_texto'}))
+    Dosis  = forms.FloatField(min_value=0, label="Dosis",localize=False,widget=forms.NumberInput(attrs={'class':'form-control texto input_texto'}))
     
 
     error_css_class = 'alert alert-danger'
@@ -33,3 +33,7 @@ class Set_Horario(forms.Form):
 
     def clean(self):
         return self.cleaned_data
+
+    def hidden_fields(self):
+        return self.fields["Opc_Hora"]
+        

@@ -1,0 +1,75 @@
+
+html{
+
+    font-size: 12px;
+   
+
+}
+
+.row_form
+{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+h1{
+    font-size: 2.5rem;
+}
+h2{
+    font-size: 2rem;
+}
+.texto{
+    font-size: 1.5rem !important;
+}
+.pop{
+    font-size: 1rem;
+}
+.nav_bar_elem{
+    
+    font-size: 1.5rem;
+}
+.dropdown_elem{
+    font-size: 1.5rem;
+}
+.table_texto{
+    font-size: 1rem;
+}
+.title_table_texto{
+    font-size: 1.3rem;
+}
+.input_texto{
+    
+    display: inline !important;
+    width: auto;
+    
+}
+.input_texto{
+    
+    display: inline !important;
+    
+}
+.tabledf
+{
+    background-color: rgb(226, 226, 226);
+}
+
+@media screen and (max-width:992px) {
+        
+    html{
+
+        font-size: 20px;
+       
+    
+    }
+    .nav_bar_elem{
+    
+        font-size: 1.7rem;
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+    .dropdown_elem{
+        font-size: 1.7rem;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}

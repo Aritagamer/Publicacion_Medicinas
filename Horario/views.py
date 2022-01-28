@@ -67,7 +67,7 @@ def New_Horario(request):
         if not formulario.is_valid():
             
             formulario.fields['Medicamento'].widget.choices = lista
-            return render(request,'Formularios.html',{"user":user,"Formulario":formulario})
+            return render(request,'Horario_Form.html',{"user":user,"Formulario":formulario})
 
         data = formulario.cleaned_data
         medicamento = Medicinas.objects.get( id = data.get('Medicamento') )
@@ -83,7 +83,7 @@ def New_Horario(request):
     
     f.fields['Medicamento'].widget.choices = lista
 
-    return render(request,'Formularios.html',{"user":user,"Formulario":f})
+    return render(request,'Horario_Form.html',{"user":user,"Formulario":f})
 
 def Update_Horario(request):
     user = IU(request)
@@ -99,7 +99,7 @@ def Update_Horario(request):
 
         if not formulario.is_valid():
             formulario.fields['Medicamento'].widget.choices = lista
-            return render(request,'Formularios.html',{"user":user,"Formulario":formulario})
+            return render(request,'Horario_Form.html',{"user":user,"Formulario":formulario})
 
         data = formulario.cleaned_data
         medicamento = Medicinas.objects.get(id = data.get('Medicamento'))
@@ -126,7 +126,9 @@ def Update_Horario(request):
     f.fields["Dosis"].initial = Horario_Edit.Dosis
     f.fields["Hora"].initial = Horario_Edit.Hora
     f.fields["Minutos"].initial = Horario_Edit.Minutos
-    return render(request,'Formularios.html',{"user":user,"Formulario":f})
+    f.fields["Opc_Hora"].initial = 1
+    
+    return render(request,'Horario_Form.html',{"user":user,"Formulario":f})
 
 
 def Delete_Horario(request):

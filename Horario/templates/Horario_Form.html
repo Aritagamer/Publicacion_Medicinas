@@ -1,0 +1,63 @@
+{% extends 'Base/template.html' %}
+{% load static %}
+{% block titulo %}
+  <title>Configurar Horario</title>
+{% endblock %}
+
+{% block contenido %}
+
+
+
+  <form action="" method="post">{% csrf_token %}
+    <div class="container-fluid">
+        <div class="row row_form">
+            <div class="coasl-lg-auto texto fw-bold"></div>
+            <div class="col-lg-6 texto {% if  Formulario.Dia.errors %} alert alert-danger {% endif %}">
+                <label for="{{Formulario.Dia.if_for_label}}">{{Formulario.Dia.label}}</label>
+                <span>{{Formulario.Dia}}</span> {{Formulario.Dia.errors}}
+            </div>
+            
+            <div class="col-lg-6 texto {% if  Formulario.Dia.errors %} alert alert-danger {% endif %}">
+                <label for="{{Formulario.Hora.id_for_label}}">{{Formulario.Hora.label}}</label>
+                <span class="colar">
+                    {{Formulario.Hora}} {{Formulario.Hora.errors}}
+                </span> : 
+                <span class="colar">
+                    {{Formulario.Minutos}}  {{Formulario.Minutos.errors}}
+                </span>
+            </div>
+            
+        
+        </div>
+        <div class="row row_form">
+            <div class="col-12 texto fw-bold">{{Formulario.Opc_Hora.label}}</div>
+            <div class="row">
+                {% for i in Formulario.Opc_Hora %}
+                <div class="col-lg form-check-inline">
+                    <div class="row justify-content-lg-center">{{i.tag}}</div>
+                    <div class="row" >
+                        <label for="{{ i.id_for_label }}" class="form-check-label texto text-lg-center">{{i.choice_label}}</label>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-12">{{Formulario.Opc_Hora.errors}}</div>
+        </div>
+        
+        <div class="row row_form">
+            
+            <div class="col-lg-6 texto">
+                <label for="{{Formulario.Medicamento.id_for_label}}">{{Formulario.Medicamento.label}}</label>
+                <span>{{Formulario.Medicamento}} {{Formulario.Medicamento.errors}}</span>
+            </div>
+            <div class="col-lg-6 texto">
+                <label for="{{Formulario.Dosis.id_for_label}}">{{Formulario.Dosis.label}}</label>
+                <span>{{Formulario.Dosis}} {{Formulario.Dosis.errors}}</span>
+            </div>
+            
+        </div>   
+        
+      <button type="submit" value="Enviar" class = "btn btn-primary mb-3 texto" >Enviar</button>
+    </div>
+  </form>
+{% endblock %}
