@@ -7,29 +7,74 @@
 {% block contenido %}
 
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-6">
-        <p class = "text-start fw-bold text-wrap"  style="font-size: 2.7vh;"> Inventario de medicamentos </p>
+      <div class="col-lg-4">
+        <h2 class = "text-start fw-bold text-wrap"> Inventario de medicamentos </h2>
       </div>
-      <div class="col-6">
-        <ul class="nav justify-content-end">
-      
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/inv/new/"  style="font-size: 2.5vh;">Nuevo Medicamento</a>
-          </li>
-        </ul>
+      <div class="col-lg-8 py-1">
+        <div class="row justify-content-end">
+          <form action="" method="post">{% csrf_token %}  
+            <div class="row {% if  Formulario.Medicamento.errors %} alert alert-danger {% endif %}">
+              
+              <div class="col-4">
+                  <label for="{{Formulario.Medicamento.id_for_label}}" class="texto">
+                      {{Formulario.Medicamento.label}}
+                  </label>
+              </div>
+              <div class="col-8">
+                  {{Formulario.Medicamento}} {{Formulario.Medicamento.errors}}
+              </div>
+
+            </div>
+            
+            <div class="row row_form ">
+              <div class="col-lg-5 {% if  Formulario.Unidades.errors %} alert alert-danger {% endif %}">
+                <div class="row">
+
+                  <div class="col-4">
+                    <label for="{{Formulario.Unidades.id_for_label}}" class="texto">
+                        {{Formulario.Unidades.label}}
+                    </label>
+                  </div>
+                  <div class="col-6">
+                      {{Formulario.Unidades}} {{Formulario.Unidades.errors}}
+                  </div>
+
+                </div>
+                
+              </div>
+              <div class="col-lg-5 {% if  Formulario.Registro.errors %} alert alert-danger {% endif %}">
+                <div class="row">
+                  <div class="col-4">
+                    <label for="{{Formulario.Registro.id_for_label}}" class="texto">
+                        {{Formulario.Registro.label}}
+                    </label>
+                  </div>
+                  <div class="col-6">
+                      {{Formulario.Registro}} {{Formulario.Registro.errors}}
+                  </div>
+                </div>
+                
+              </div>
+                  
+                
+            </div>
+          
+            <button type="submit" value="Enviar" class = "btn btn-primary texto">Nuevo Medicamento</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
   <div class="table-responsive">
-    <table class = "table table-info table-striped table-hover text-center"  style="font-size: 2.5vh;">
+    <table class = "table table-info table-striped table-hover text-center" >
       <thead>
           <tr>
-              <th class="text-start">#</th>
-              <th class="text-start">Nombre</th>
-              <th>Cantidad</th>
-              <th>Registro</th>
+              <th class="text-start title_table_texto">#</th>
+              <th class="text-start title_table_texto">Nombre</th>
+              <th class="title_table_texto">Cantidad</th>
+              <th class="title_table_texto">Registro</th>
               <th></th>
               <th></th>
           </tr>
@@ -37,24 +82,24 @@
       <tbody>
           {% for i in elem %}
               <tr>
-                  <th class="text-start">{{ forloop.counter  }}</th>
-                  <td class="text-start">{{ i.Medicamento }}</td>
-                  <td>{{ i.Unidades }}</td>
-                  <td>
+                  <th class="text-start table_texto">{{ forloop.counter  }}</th>
+                  <td class="text-start table_texto">{{ i.Medicamento }}</td>
+                  <td class="table_texto">{{ i.Unidades }}</td>
+                  <td class="table_texto">
                     {% if i.Registro %}
                       <p class="text-center">x</p> 
                     {% endif %}
                   </td>
-                  <td>
+                  <td class="table_texto">
                     <form action="/inv/update" method="get">{% csrf_token %}
                       <input type="hidden" name="id" value="{{ i.id }}">
-                      <button type="submit" class = "btn btn-primary mb-3" style = "font-size: 2.5vh;">Editar</button>
+                      <button type="submit" class = "btn btn-primary mb-3" >Editar</button>
                     </form>
                   </td>
-                  <td>
+                  <td class="table_texto">
                     <form action="/inv/delete/" method="post">{% csrf_token %}
                       <input type="hidden" name="id" value="{{ i.id }}">
-                      <button type="submit" class = "btn btn-danger mb-3" style = "font-size: 2.5vh;">Eliminar</button>
+                      <button type="submit" class = "btn btn-danger mb-3" >Eliminar</button>
                     </form>
                   </td>
               </tr>

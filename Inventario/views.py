@@ -84,5 +84,27 @@ def Inventario(request):
     user = IU(request)
     id = request.session.get("Working_ID","")
 
+    if request.method  == "POST":
+        
+        formulario = Registro(request.POST)
+
+        if not formulario.is_valid():
+            return render(request,'Formularios.html',{"user":user,"Formulario":formulario})
+
+        data = formulario.cleaned_data
+        usuario  = Usuario.objects.get(id = request.session.get("Working_ID") )
+        medicina = Medicinas(
+            Medicamento = data.get('Medicamento'),
+            Unidades = data.get('Unidades'),
+            ID_Usuario = usuario,
+            Registro = data.get('Registro')
+        )
+
+        medicina.save()
+
+        return render(request,'exito.html',{"user":user,"mensaje":"Nuevo Medicamento registrado con exito",'URL':'/inv/'})
+
+
     search = Medicinas.objects.filter(ID_Usuario = id)
-    return render(request,'Inventario.html',{"user":user,"elem":search})
+    f = Registro(auto_id=True)
+    return render(request,'Inventario.html',{"user":user,"elem":search,"Formulario":f})
