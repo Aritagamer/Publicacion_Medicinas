@@ -48,7 +48,7 @@ def Editar(request):
             return render(request,'Formularios.html',{"user":user,"Formulario":formulario})
 
         data = formulario.cleaned_data
-        medicina = Medicinas.objects.get(id = request.session.get("Temp_ID"))
+        medicina = Medicinas.objects.get(id = request.POST.get("Temp_ID",''))
         request.session["Temp_ID"] = ''
         medicina.Medicamento = data.get("Medicamento")
         medicina.Unidades = data.get("Unidades")

@@ -14,7 +14,7 @@
       </div>
       <div class="col-lg-8 py-1">
         <div class="row justify-content-end">
-          <form action="" method="post">{% csrf_token %}  
+          <form action="" method="post" id="medicamento">{% csrf_token %}  
             <div class="row {% if  Formulario.Medicamento.errors %} alert alert-danger {% endif %}">
               
               <div class="col-4">
@@ -61,7 +61,7 @@
                 
             </div>
           
-            <button type="submit" value="Enviar" class = "btn btn-primary texto">Nuevo Medicamento</button>
+            <button type="submit" value="Enviar" id="inv_Send" class = "btn btn-primary texto">Nuevo Medicamento</button>
           </form>
         </div>
       </div>
@@ -83,18 +83,16 @@
           {% for i in elem %}
               <tr>
                   <th class="text-start table_texto">{{ forloop.counter  }}</th>
-                  <td class="text-start table_texto">{{ i.Medicamento }}</td>
-                  <td class="table_texto">{{ i.Unidades }}</td>
-                  <td class="table_texto">
+                  <td class="text-start table_texto" id="{{ i.id }}_Medicamento">{{ i.Medicamento }}</td>
+                  <td class="table_texto" id="{{ i.id }}_Unidades">{{ i.Unidades|stringformat:"0.2f" }}</td>
+                  <td class="table_texto" id="{{i.id }}_Registro">
                     {% if i.Registro %}
                       <p class="text-center">x</p> 
                     {% endif %}
                   </td>
                   <td class="table_texto">
-                    <form action="/inv/update" method="get">{% csrf_token %}
                       <input type="hidden" name="id" value="{{ i.id }}">
-                      <button type="submit" class = "btn btn-primary mb-3" >Editar</button>
-                    </form>
+                      <button type="" class = "btn btn-primary mb-3" id="{{i.id }}_Edit" onclick="editar_Campo('{{ i.id }}')">Editar</button>
                   </td>
                   <td class="table_texto">
                     <form action="/inv/delete/" method="post">{% csrf_token %}
