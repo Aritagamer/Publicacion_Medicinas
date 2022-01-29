@@ -11,25 +11,40 @@
   <form action="" method="post">{% csrf_token %}
     <div class="container-fluid">
         <div class="row row_form">
-            <div class="coasl-lg-auto texto fw-bold"></div>
-            <div class="col-lg-6 texto {% if  Formulario.Dia.errors %} alert alert-danger {% endif %}">
-                <label for="{{Formulario.Dia.if_for_label}}">{{Formulario.Dia.label}}</label>
-                <span>{{Formulario.Dia}}</span> {{Formulario.Dia.errors}}
+            <div class="col-lg-5 texto {% if  Formulario.Dia.errors %} alert alert-danger {% endif %}">
+                <div class="row row_form">
+                    <div class="col-2">
+                        <label for="{{Formulario.Dia.if_for_label}}" class="texto">{{Formulario.Dia.label}}</label>
+                    </div>
+                    <div class="col-8">
+                        {{Formulario.Dia}} {{Formulario.Dia.errors}}
+                    </div>
+                </div>
+                
             </div>
             
-            <div class="col-lg-6 texto {% if  Formulario.Dia.errors %} alert alert-danger {% endif %}">
-                <label for="{{Formulario.Hora.id_for_label}}">{{Formulario.Hora.label}}</label>
-                <span class="colar">
-                    {{Formulario.Hora}} {{Formulario.Hora.errors}}
-                </span> : 
-                <span class="colar">
-                    {{Formulario.Minutos}}  {{Formulario.Minutos.errors}}
-                </span>
+            <div class="col-lg-4 texto ">
+                <di class="row row_form">
+                    <div class="col-3">
+                        <label for="{{Formulario.Hora.id_for_label}}">{{Formulario.Hora.label}}</label>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-5 {% if  Formulario.Hora.errors %} alert alert-danger {% endif %}">
+                                {{Formulario.Hora}} {{Formulario.Hora.errors}}
+                            </div>
+                            :
+                            <div class="col-5 {% if  Formulario.Minutos.errors %} alert alert-danger {% endif %}">
+                                {{Formulario.Minutos}}  {{Formulario.Minutos.errors}}
+                            </div>
+                        </div>
+                    </div>
+                </di>
             </div>
             
         
-        </div>
-        <div class="row row_form">
+        </div> 
+        <div class="row row_form {% if  Formulario.Opc_Hora.errors %} alert alert-danger {% endif %}">
             <div class="col-12 texto fw-bold">{{Formulario.Opc_Hora.label}}</div>
             <div class="row">
                 {% for i in Formulario.Opc_Hora %}
@@ -46,13 +61,29 @@
         
         <div class="row row_form">
             
-            <div class="col-lg-6 texto">
-                <label for="{{Formulario.Medicamento.id_for_label}}">{{Formulario.Medicamento.label}}</label>
-                <span>{{Formulario.Medicamento}} {{Formulario.Medicamento.errors}}</span>
+            <div class="col-lg-4 texto">
+                <div class="row row_form {% if  Formulario.Medicamento.errors %} alert alert-danger {% endif %}">
+                    <div class="col-4">
+                        <label for="{{Formulario.Medicamento.id_for_label}}">{{Formulario.Medicamento.label}}</label>
+                    </div>
+                    <div class="col-8">
+                        {{Formulario.Medicamento}} {{Formulario.Medicamento.errors}}
+                    </div>
+                </div>
+                
+                
             </div>
-            <div class="col-lg-6 texto">
-                <label for="{{Formulario.Dosis.id_for_label}}">{{Formulario.Dosis.label}}</label>
-                <span>{{Formulario.Dosis}} {{Formulario.Dosis.errors}}</span>
+            <div class="col-lg-4 texto">
+                <div class="row row_form {% if  Formulario.Dosis.errors %} alert alert-danger {% endif %}">
+                    <div class="col-2">
+                        <label for="{{Formulario.Dosis.id_for_label}}">{{Formulario.Dosis.label}}</label>
+                    </div>
+                    <div class="col-6">
+                        {{Formulario.Dosis}} {{Formulario.Dosis.errors}}
+                    </div>
+                </div>
+                
+                
             </div>
             
         </div>   

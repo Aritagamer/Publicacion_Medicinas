@@ -11,7 +11,7 @@ class Set_Horario(forms.Form):
         [6,"Sabado"],
         [7,"Domingo"],
         [8,"Diario"]
-        ],widget=forms.Select(attrs={'class' : 'form-select texto input_texto'}))
+        ],widget=forms.Select(attrs={'class' : 'form-select texto '}))
     Opc_Hora  = forms.ChoiceField(label = "Tipo de horario",initial=24,required=True,choices=[
         [24,"Esta hora"],
         [12,"Cada 12 horas"],
@@ -22,10 +22,10 @@ class Set_Horario(forms.Form):
         [1,"Cada hora"]
         ],
         widget=forms.RadioSelect(attrs={'class' : 'form-check-input texto '}))
-    Hora = forms.IntegerField(label="Hora",max_value=24,min_value=0,widget=forms.NumberInput(attrs={'class':'texto form-control input_texto', 'pattern':'[0-2][0-9]','placeholder':'00'}))
-    Minutos = forms.IntegerField(label="Minutos",max_value=60,min_value=0,widget=forms.NumberInput(attrs={'class':'form-control input_texto texto', 'pattern':'[0-6][0-9]','placeholder':'00'}))
-    Medicamento = forms.CharField(label="Medicamento",required=True, widget=forms.Select(attrs={'class' : 'form-select texto input_texto'}))
-    Dosis  = forms.FloatField(min_value=0, label="Dosis",localize=False,widget=forms.NumberInput(attrs={'class':'form-control texto input_texto'}))
+    Hora = forms.IntegerField(label="Hora",max_value=24,min_value=0,widget=forms.NumberInput(attrs={'class':'texto form-control ', 'pattern':'[0-2][0-9]','placeholder':'00'}))
+    Minutos = forms.IntegerField(label="Minutos",max_value=60,min_value=0,widget=forms.NumberInput(attrs={'class':'form-control  texto', 'pattern':'[0-6][0-9]','placeholder':'00'}))
+    Medicamento = forms.CharField(label="Medicamento",required=True, widget=forms.Select(attrs={'class' : 'form-select texto '}))
+    Dosis  = forms.FloatField(min_value=0, label="Dosis",localize=False,widget=forms.NumberInput(attrs={'class':'form-control texto '}))
     
 
     error_css_class = 'alert alert-danger'
