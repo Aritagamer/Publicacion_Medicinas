@@ -6,6 +6,10 @@
 
 {% block contenido %}
 
+  {% if not mensaje_exito %}
+    <div class="alert alert-danger">Ya valio madres</div>
+  {% endif %}
+
 
   <div class="container-fluid" >
     <div class="row" >
@@ -145,4 +149,9 @@
       </tbody>
     </table>
   </div>
+
+{% endblock %}
+
+{% block scripts %}
+  <script>get_Hours()</script>
 {% endblock %}

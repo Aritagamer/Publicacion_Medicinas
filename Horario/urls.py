@@ -6,5 +6,6 @@ urlpatterns = [
     path('new/',views.New_Horario),
     path('update/',views.Update_Horario),
     path('delete/',views.Delete_Horario),
-    path('give/',views.Give_Horario)
+    path('give/',views.Give_Horario),
+    path('g/',views.notificacion_View)
 ]

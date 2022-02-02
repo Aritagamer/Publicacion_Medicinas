@@ -1,3 +1,4 @@
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from .forms import Set_Horario
 import datetime
@@ -145,3 +146,13 @@ def Delete_Horario(request):
 
     return render(request,'error.html',{"user":user,"mensaje":"error inesperado",'URL':'/hor/'})
    
+def notificacion_View(request):
+    
+    hora = datetime.datetime.now().hour
+    data = medicinas = set_Horario.objects.filter(Usuario = request.session.get("Working_ID")).filter(Hora = hora )
+    lista = [i.Medicamento.Medicamento for i in data]
+    return JsonResponse(
+        {
+            "Medicamentos" : lista
+        }
+    )

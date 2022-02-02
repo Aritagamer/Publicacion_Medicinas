@@ -1,3 +1,62 @@
+document.addEventListener("DOMContentLoaded",
+    ()=>{
+        if(!Notification){
+            return;
+        }
+
+        if(Notification.permission !== "granted")
+        {
+            Notification.requestPermission();
+        }
+
+    });
+
+function get_Hours()
+{
+
+    hora = new Date()
+
+    horas = hora.getHours()
+    minutos  = hora.getMinutes()
+
+    var mensaje = `Estos medicamentos tocan en esta hora: `
+
+    fetch("/hor/g/").then(
+        (response) =>
+        {
+            if (response.ok)
+            {
+                response.json().then(
+                    (data)=>{
+                        tos = data.Medicamentos
+                        if (tos.length)
+                        {
+
+                            tos.forEach(element => {
+
+                                mensaje = mensaje.concat("\n" + element)
+    
+                            });
+    
+                            var notificacion = new Notification(
+                                "Medicamentos a tomar",
+                                {
+                                    body: mensaje
+                                }
+                            )
+
+                        }
+                        
+                    }
+                )
+            }
+        }
+    );
+    
+
+}
+
+
 var popoverTriggerList = [].slice.call(
     document.querySelectorAll('[data-bs-toggle="popover"]')
     )
